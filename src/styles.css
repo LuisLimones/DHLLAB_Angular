@@ -1,0 +1,9 @@
+body{
+    background-color: black;
+    color: yellow;
+    background-image: url('./assets/img/pf.jpg');   
+}
+
+label{
+    background-color: rgb(216, 12, 12)
+}
