@@ -26,5 +26,9 @@ export class UsuarioService {
   login(data): Observable<any>{
     return this.http.post<any>(this.url+'login', data, this.httpOptions);
   }
+
+  getUsuario():Observable<User>{
+    return this.http.get<User>(this.url+'getUsuario', this.httpOptions);
+  }
 }
 
