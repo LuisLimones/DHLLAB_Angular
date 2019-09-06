@@ -41,6 +41,8 @@ export class AdminComponent implements OnInit {
 
   depurar(){
     this.ps.depurar().subscribe(data => {
+      this.getPartidas();
+      this.emmiter.emit('actualizar', this.partidas)
       if(data){
         this.toastr.success('Partidas Eliminadas', '', {
           timeOut:2000

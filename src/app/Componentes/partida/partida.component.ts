@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PartidaService } from '../../Servicios/partida.service';
 import { Partida } from '../../Modelos/partida';
 import { ToastrService } from 'ngx-toastr';
@@ -69,7 +69,17 @@ export class PartidaComponent implements OnInit {
         localStorage.setItem('turno', this.turno.toString())
         location.reload();
       }
+    });
+    this.listener.on("salir", () =>{
+      this.toastr.show("Gracias Por El Juego", "", {
+        timeOut:2000
+      })
+      this.salir();
     })
+  }
+
+  async ngOnDestroy(){
+    this.salir();
   }
 
   random(){
@@ -111,7 +121,10 @@ export class PartidaComponent implements OnInit {
 
   salir(){
     let id=this.id;
+    localStorage.removeItem('idPartida');
     this.ps.salir({id}).subscribe(data => {
+      this.emmiter.emit("salir");
+      this.wsClose();
       this.router.navigate(['/salas']);
     });
   }
@@ -190,5 +203,9 @@ export class PartidaComponent implements OnInit {
         location.reload();
       }
     }
+  }
+
+  async wsClose(){
+    this.ws.close();
   }
 }

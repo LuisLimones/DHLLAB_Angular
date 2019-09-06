@@ -6,6 +6,7 @@ import { LoginComponent } from './Componentes/login/login.component';
 import { AdminComponent } from './Componentes/admin/admin.component';
 import { PartidaComponent } from './Componentes/partida/partida.component';
 import { SalasComponent } from './Componentes/salas/salas.component';
+import { NavbarComponent } from './Componentes/navbar/navbar.component';
 
 const routes: Routes = [
   {path: 'registrar', component: RegistroComponent},

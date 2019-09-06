@@ -25,6 +25,7 @@ export class SalasComponent implements OnInit {
     await this.wsConectar();
     this.listener.on('actualizar', (data)=>{
       this.partidas=data;
+      this.getPartidas();
     });
   }
 

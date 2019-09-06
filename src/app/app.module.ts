@@ -18,6 +18,7 @@ import { AdminComponent } from './Componentes/admin/admin.component';
 import { InterceptorService } from './Servicios/interceptor.service';
 import { UsuarioService } from './Servicios/usuario.service';
 import { PartidaService } from './Servicios/partida.service';
+import { NavbarComponent } from './Componentes/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { PartidaService } from './Servicios/partida.service';
     SalasComponent,
     PartidaComponent,
     AdminComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
