@@ -28,6 +28,10 @@ export class PartidaService {
     return this.http.get<Partida[]>(this.url+'partidas', this.httpOptions);
   };
 
+  obtenerPartida(data): Observable<Partida>{
+    return this.http.post<Partida>(this.url+'partida', data, this.httpOptions);
+  }
+
   entrar(data): Observable<Partida>{
     console.log("Entrar partida service "+data);
     return this.http.post<Partida>(this.url+'entrar', data, this.httpOptions);

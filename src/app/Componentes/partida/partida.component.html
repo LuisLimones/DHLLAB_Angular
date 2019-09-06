@@ -22,7 +22,8 @@
                 </div>
                 <div class="row" style="padding-top: 10px">
                     <div class="col-6">
-                        <button>Preguntar Ganador</button>
+                        <button *ngIf="rol != 'interrogador'" (click)="escogerPersonaje()">Escoger Personaje</button>
+                        <button *ngIf="rol != 'interrogado'" (click)="juego()">¿Es Este Tu Personaje?</button>
                         <button (click)="salir()">Salir</button>
                     </div>
                     <div *ngIf="seleccionado != ''" class="col-2">
