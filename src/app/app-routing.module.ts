@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: 'salas', component: SalasComponent},
   {path: 'partidas/:id', component: PartidaComponent},
-  {path: '**', redirectTo: "" }
+  {path: '**', redirectTo: "/login" }
  
 ];
 @NgModule({

@@ -33,6 +33,11 @@ export class PartidaComponent implements OnInit {
 
   async ngOnInit(){
     this.id=this.route.snapshot.paramMap.get('id');
+    let idString=this.id.toString();
+    if(localStorage.getItem('idPartida')!=idString){
+      localStorage.setItem('idPartida', idString);
+      localStorage.setItem('turno', "0");
+    }
     this.getPartida();
     await this.wsConectar();
     this.listener.on("mensajes", (data) =>{
@@ -43,8 +48,28 @@ export class PartidaComponent implements OnInit {
     });
     this.listener.on("personaje", (data)=>{
       this.personaje=data;
-      console.log(this.personaje);
+      this.toastr.success("Seleccionaron Un Personaje, Puedes Preguntar", "", {
+        timeOut:2000
+      })
     });
+    this.listener.on("ganador", (data)=>{
+      if(data=="ganador"){
+        this.toastr.success("Ganador", "Yay",{
+          timeOut:3000
+        });
+        this.turno++;
+        localStorage.setItem('turno', this.turno.toString())
+        location.reload();
+      }
+      else{
+        this.toastr.error("Perdiste", "Whoops", {
+          timeOut:3000
+        });
+        this.turno++;
+        localStorage.setItem('turno', this.turno.toString())
+        location.reload();
+      }
+    })
   }
 
   random(){
@@ -100,8 +125,14 @@ export class PartidaComponent implements OnInit {
   getPartida(){
     this.ps.obtenerPartida({idPartida: this.id}).subscribe(data => {
       this.partida=data;
-      this.turno=this.partida.jugadores;
-      this.comprobar()
+      if(Number(localStorage.getItem('turno'))==0){
+        this.turno=this.partida.jugadores;
+        localStorage.setItem('turno', this.turno.toString());
+      }
+      else{
+        this.turno=Number(localStorage.getItem('turno'));
+      }
+      this.comprobar();
     })
   }
 
@@ -128,6 +159,7 @@ export class PartidaComponent implements OnInit {
       this.personaje=this.seleccionado;
       console.log(this.personaje);
       await this.emmiter.emit("personaje", this.personaje);
+      this.toastr.success("Personaje Seleccionado, Responde Las Preguntas");
     }
   }
 
@@ -142,12 +174,20 @@ export class PartidaComponent implements OnInit {
       if(this.seleccionado==this.personaje){
         this.toastr.success("Ganador", "Yay",{
           timeOut:3000
-        })
+        });
+        this.turno++;
+        localStorage.setItem('turno', this.turno.toString())
+        this.emmiter.emit("ganador", "perdedor");
+        location.reload();
       }
       else{
         this.toastr.error("Perdiste", "Whoops", {
           timeOut:3000
         });
+        this.turno++;
+        localStorage.setItem('turno', this.turno.toString())
+        this.emmiter.emit("ganador", "ganador");
+        location.reload();
       }
     }
   }

@@ -18,6 +18,14 @@ export class LoginComponent implements OnInit {
   constructor(private us: UsuarioService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('token')){
+      if(localStorage.getItem('tipo')=="Usuario"){
+        this.router.navigate(['/salas']);
+      }
+      if(localStorage.getItem("tipo")=="Administrador"){
+        this.router.navigate(["/admin"]);
+      }
+    }
   }
 
   login(){
@@ -26,9 +34,16 @@ export class LoginComponent implements OnInit {
       if(data.token.token){
         localStorage.setItem('token', data.token.token);
         localStorage.setItem('tipo', data.us.tipo);
+        localStorage.setItem('idPartida', "0");
         this.toastr.success('Bienvenido','',{
           timeOut: 2000
         })
+        if(localStorage.getItem('tipo')=="Usuario"){
+          this.router.navigate(['/salas']);
+        }
+        else{
+          this.router.navigate(['/admin']);
+        }
       }
       else{
         this.toastr.error('Error de autenticacion', '', {
