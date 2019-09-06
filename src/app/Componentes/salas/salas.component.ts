@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PartidaService } from '../../Servicios/partida.service';
+import { Partida } from '../../Modelos/partida';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-salas',
@@ -7,9 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SalasComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ps: PartidaService, private router: Router) { }
+
+  partidas: Partida[];
+  
 
   ngOnInit() {
+    this.getPartidas();
+  }
+
+  getPartidas(){
+    this.ps.getPartidas().subscribe(data => {
+      this.partidas=data;
+    });
+  }
+
+  entrar(id){
+    this.ps.entrar({id}).subscribe();
+    this.router.navigate(['/partidas/'+id]);
   }
 
 }

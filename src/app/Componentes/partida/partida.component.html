@@ -1,1 +1,50 @@
-<p>partida works!</p>
+<!-- <div class="container-fluid col-8">
+    <div class="row">
+        <div *ngFor="let n of numeros" class="col-3">
+            <div class="row">
+                <img src="../../../assets/img/{{n}}.jpg" (click)="click(n)" style="padding-top: 10px">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container col-4">existe</div> -->
+
+<div class="row">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="row">
+                    <div *ngFor="let n of numeros" class="col-3">
+                        <div class="row">
+                            <img src="../../../assets/img/{{n}}.jpg" (click)="click(n)" style="padding-top: 10px;" id={{n}}>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="padding-top: 10px">
+                    <div class="col-6">
+                        <button>Preguntar Ganador</button>
+                        <button (click)="salir()">Salir</button>
+                    </div>
+                    <div *ngIf="seleccionado != ''" class="col-2">
+                        <img src="../../../assets/img/{{seleccionado}}.jpg" width="64px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="container scrollable" style="background:rgb(154, 0, 0); width: 100%; height: 100%;">
+                    <h3>Chat Del Juego</h3>
+                    <h5 *ngFor="let men of chat">{{men}}</h5>
+                </div>
+                <div class="row" style="padding-left: 15px">
+                    <form (ngSubmit)="enviarMensaje()">
+                        <input type="text" style="background-color: rgb(154, 0, 0);
+                        color: rgb(249, 233, 1); width: 350px" placeholder="Escribe aqui tus preguntas o respuestas"
+                        name="mensaje" id="mensaje" [(ngModel)]="mensaje" #mensajeLocal="ngModel">
+                        <br>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

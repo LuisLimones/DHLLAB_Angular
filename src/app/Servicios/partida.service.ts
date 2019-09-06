@@ -29,10 +29,12 @@ export class PartidaService {
   };
 
   entrar(data): Observable<Partida>{
+    console.log("Entrar partida service "+data);
     return this.http.post<Partida>(this.url+'entrar', data, this.httpOptions);
   }
 
   salir(data): Observable<Partida>{
+    console.log("Llega SALIR ps "+data);
     return this.http.post<Partida>(this.url+'salir', data, this.httpOptions);
   }
 

@@ -1,9 +1,20 @@
 body{
     background-color: black;
-    color: yellow;
+    color: rgb(249, 233, 1);
     background-image: url('./assets/img/pf.jpg');   
 }
 
 label{
-    background-color: rgb(216, 12, 12)
+    background-color: rgb(154, 0, 0);
+}
+
+button{
+    background-color: rgb(154, 0, 0);
+    color: rgb(249, 233, 1); 
+}
+
+.scrollable{
+    max-height: 500px;
+    overflow: auto;
+    padding-bottom: 15px;
 }
